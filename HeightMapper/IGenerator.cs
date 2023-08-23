@@ -2,7 +2,9 @@
 
 public interface IGenerator
 {
-    public int OptionCount { get; }
+    public string Description { get; }
+    
+    public int    OptionCount { get; }
 
     public string GetOptionPrompt(int index);
 
@@ -11,6 +13,8 @@ public interface IGenerator
     public object GetOptionValue(int index);
 
     public void SetOptionValue(int index, object value);
+    
+    public bool WillResetMap { get; }
 
     public void Generate(Map map);
 }

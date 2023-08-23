@@ -7,6 +7,18 @@ public class Noise : GeneratorBase
     private readonly IntegerOption _coverage  = new IntegerOption("Coverage Percent", 25, 1, 100);
     private readonly IntegerOption _maxChange = new IntegerOption("Max Height Change", short.MaxValue - 1, 1, short.MaxValue - 1);
 
+    public int CoveragePercent
+    {
+        get => _coverage.IntegerValue;
+        set => _coverage.IntegerValue = value;
+    }
+
+    public ushort MaxHeightChange
+    {
+        get => (ushort)_maxChange.IntegerValue;
+        set => _maxChange.IntegerValue = value;
+    }
+    
     public Noise()
     {
         SetOptions(_coverage, _maxChange);
@@ -18,6 +30,8 @@ public class Noise : GeneratorBase
         _coverage.IntegerValue  = coveragePct;
         _maxChange.IntegerValue = maxChange;
     }
+
+    public override string Description => "Adds random noise to the map.";
 
     public override void Generate(Map map)
     {

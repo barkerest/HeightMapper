@@ -4,8 +4,14 @@ namespace HeightMapper.Generators;
 
 public class Average : GeneratorBase
 {
-    private readonly IntegerOption _distance = new IntegerOption("Blur Distance", 16, 1, 64);
+    private readonly IntegerOption _distance = new IntegerOption("Averaging Distance", 16, 1, 64);
 
+    public int AveragingDistance
+    {
+        get => _distance.IntegerValue;
+        set => _distance.IntegerValue = value;
+    }
+    
     public Average()
     {
         SetOptions(_distance);
@@ -16,6 +22,9 @@ public class Average : GeneratorBase
     {
         _distance.IntegerValue = distance;
     }
+
+    public override string Description =>
+        "Computes the average height for a pixel based on surrounding pixels (map rotation should be 0).";
 
     public override void Generate(Map map)
     {
