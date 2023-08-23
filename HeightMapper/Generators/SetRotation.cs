@@ -4,7 +4,7 @@ namespace HeightMapper.Generators;
 
 public class SetRotation : GeneratorBase
 {
-    private readonly IntegerOption _degrees = new IntegerOption("Degrees to rotate (clockwise)", 0, -360, 360);
+    private readonly IntegerOption _degrees = new IntegerOption("Degrees to Rotate Map", 0, -360, 360);
 
     public int Degrees
     {
