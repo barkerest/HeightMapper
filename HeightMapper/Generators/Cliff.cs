@@ -45,7 +45,7 @@ public class Cliff : GeneratorBase
         if (maxEdge > map.Height - 1) maxEdge = map.Height - 1;
         
         // current edge.
-        var edge  = (Random.Next() % (jitter * 2 + 1)) - jitter + thickness;
+        var edge  = (map.Random.Next() % (jitter * 2 + 1)) - jitter + thickness;
         var slope = jitter < 4 ? 1 : ((jitter + 2) / 4);
         var momentum  = 0;
 
@@ -68,7 +68,7 @@ public class Cliff : GeneratorBase
                 }
             }
 
-            Random.NextBytes(b);
+            map.Random.NextBytes(b);
             var drift = b[0] switch
                         {
                             < 16  => -3,

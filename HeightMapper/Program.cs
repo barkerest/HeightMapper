@@ -10,24 +10,23 @@ public class Program
         Console.WriteLine("HeightMapper v0.1");
 
         var map = new Map(1081, 1081)
-                  .SetRotation(25)
                   .Apply(new Plain(120 * 64, 4))
-                  .SetRotation(70)
+                  .SetRotation(-30)
                   .Apply<Cliff>(900 * 64, 25)
-                  .SetRotation(25);
+                  .SetRotation(0);
         
-        var river = new MiddleRiver(70 * 64, 55, 40, courseLean: -1);
+        var river = new MiddleRiver(70 * 64, 55, 50, courseLean: -1);
         map.Apply(river);
         river.CourseLean = 1;
         map.Apply(river);
 
 
         var img = map
-                  .SetRotation(-110)
+                  .SetRotation(80)
                   .Apply(new Cliff(20 * 64, 20))
-                  .SetRotation(170)
+                  .SetRotation(130)
                   .Apply(new Cliff(20 * 64, 20))
-                  .SetRotation(210)
+                  .SetRotation(180)
                   .Apply(new Cliff(20 * 64, 20))
                   .SetRotation(0)
                   .Apply(new Noise(25, 50 * 64))

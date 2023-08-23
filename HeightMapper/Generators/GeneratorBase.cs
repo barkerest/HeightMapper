@@ -4,13 +4,6 @@ namespace HeightMapper.Generators;
 
 public abstract class GeneratorBase : IGenerator
 {
-    protected static Random Random = new Random();
-
-    public static void SetRandomSeed(int seed)
-    {
-        Random = new Random(seed);
-    }
-    
     private IGeneratorOption[] _options = Array.Empty<IGeneratorOption>();
 
     protected void SetOptions(params IGeneratorOption[] options)

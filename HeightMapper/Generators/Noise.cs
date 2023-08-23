@@ -44,7 +44,7 @@ public class Noise : GeneratorBase
         for (var x = 0; x < map.Width; x++)
         for (var y = 0; y < map.Height; y++)
         {
-            Random.NextBytes(buf);
+            map.Random.NextBytes(buf);
             if (pct == 100 ||
                 buf[4] < pctByte)
             {

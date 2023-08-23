@@ -19,10 +19,10 @@ public struct RotationMatrix
         Row2Column2 = (float)Math.Cos(radians);
     }
 
-    public (int x, int y) Apply(int x, int y)
+    public (float x, float y) Apply(int x, int y)
     {
         var dx = x * Row1Column1 + y * Row1Column2;
         var dy = x * Row2Column1 + y * Row2Column2;
-        return ((int)Math.Round(dx), (int)Math.Round(dy));
+        return ((float)Math.Round(dx), (float)Math.Round(dy));
     }
 }

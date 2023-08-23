@@ -82,7 +82,7 @@ public class MiddleRiver : GeneratorBase
         var b        = new byte[1];
 
         // starting point.
-        var mid = (Random.Next() % midRange) + minMidX;
+        var mid = (map.Random.Next() % midRange) + minMidX;
         if (_explicitStart.IntegerValue >= minMidX && _explicitStart.IntegerValue <= maxMidX)
         {
             // use the explicit value.
@@ -107,7 +107,7 @@ public class MiddleRiver : GeneratorBase
 
         for (var y = 0; y < map.Height; y++)
         {
-            Random.NextBytes(b);
+            map.Random.NextBytes(b);
             var d = b[0] switch
             {
                 < 16  => -3,
