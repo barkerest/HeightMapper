@@ -42,30 +42,4 @@ public class IntegerOption : IGeneratorOption
         get => IntegerValue;
         set => IntegerValue = (int)value;
     }
-
-    public static implicit operator int(IntegerOption self) => self._integerValue;
-
-    public static int operator -(IntegerOption self)               => -(self._integerValue);
-    
-    public static int operator -(IntegerOption a, int           b) => a._integerValue - b;
-    public static int operator +(IntegerOption a, int           b) => a._integerValue + b;
-    public static int operator *(IntegerOption a, int           b) => a._integerValue * b;
-    public static int operator /(IntegerOption a, int           b) => a._integerValue / b;
-    public static int operator -(int           a, IntegerOption b) => a - b._integerValue;
-    public static int operator +(int           a, IntegerOption b) => a + b._integerValue;
-    public static int operator *(int           a, IntegerOption b) => a * b._integerValue;
-    public static int operator /(int           a, IntegerOption b) => a / b._integerValue;
-
-    public static bool operator ==(IntegerOption a, int           b) => a._integerValue == b;
-    public static bool operator !=(IntegerOption a, int           b) => a._integerValue == b;
-    public static bool operator <(IntegerOption  a, int           b) => a._integerValue < b;
-    public static bool operator >(IntegerOption  a, int           b) => a._integerValue > b;
-    public static bool operator >=(IntegerOption a, int           b) => a._integerValue >= b;
-    public static bool operator <=(IntegerOption a, int           b) => a._integerValue <= b;
-    public static bool operator ==(int           a, IntegerOption b) => a               == b._integerValue;
-    public static bool operator !=(int           a, IntegerOption b) => a               == b._integerValue;
-    public static bool operator <(int            a, IntegerOption b) => a               < b._integerValue;
-    public static bool operator >(int            a, IntegerOption b) => a               > b._integerValue;
-    public static bool operator >=(int           a, IntegerOption b) => a               >= b._integerValue;
-    public static bool operator <=(int           a, IntegerOption b) => a               <= b._integerValue;
 }

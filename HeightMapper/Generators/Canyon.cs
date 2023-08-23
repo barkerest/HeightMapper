@@ -4,13 +4,22 @@ namespace HeightMapper.Generators;
 
 public class Canyon : GeneratorBase
 {
-    private readonly IntegerOption _bottom = new IntegerOption("Bottom Height", 120, 0, ushort.MaxValue);
-    private readonly IntegerOption _top    = new IntegerOption("Top Height", short.MaxValue, 0, ushort.MaxValue);
+    private readonly IntegerOption _bottom = new IntegerOption("Bottom Height", 1280, 0, ushort.MaxValue);
+    private readonly IntegerOption _top    = new IntegerOption("Top Height", ushort.MaxValue, 0, ushort.MaxValue);
     private readonly IntegerOption _ratio  = new IntegerOption("Bottom Ratio", 60, 10, 80);
+    private readonly IntegerOption _slope  = new IntegerOption("Slope", 0, 0, 10);
 
     public Canyon()
     {
-        SetOptions(_bottom, _ratio);
+        SetOptions(_top, _bottom, _ratio, _slope);
+    }
+
+    public Canyon(ushort topHeight, ushort bottomHeight, int bottomRatio, int bottomSlope) : this()
+    {
+        _top.IntegerValue    = topHeight;
+        _bottom.IntegerValue = bottomHeight;
+        _ratio.IntegerValue  = bottomRatio;
+        _slope.IntegerValue  = bottomSlope;
     }
 
     /// <inheritdoc />
@@ -44,16 +53,24 @@ public class Canyon : GeneratorBase
         
         if (slope < 1) slope = 1;
 
+        var bottomHeightChange = (int)(ushort.MaxValue * 0.01 * _slope.IntegerValue);
+        var bottomHeightTop    = bottomHeight + bottomHeightChange / 2;
+        
+
         var slopeHeights = new ushort[slope];
-        var heightDiff   = (ushort)(topHeight - bottomHeight);
-        for (var n = 0; n < slope; n++)
-        {
-            slopeHeights[n] = (ushort)(bottomHeight + heightDiff * (1.0 - n / (slope + 1.0)));
-        }
         
         int rx = map.Width - rightWidth, lx = leftWidth, rs, ls;
         for (var y = 0; y < map.Height; y++)
         {
+            var bottomHeightTemp = (bottomHeightTop - ((1.0 * y / map.Height) * bottomHeightChange));
+            bottomHeight = (bottomHeightTemp < 0) ? (ushort)0 : (ushort)bottomHeightTemp;
+            
+            var heightDiff = (ushort)(topHeight - bottomHeight);
+            for (var n = 0; n < slope; n++)
+            {
+                slopeHeights[n] = (ushort)(bottomHeight + heightDiff * (1.0 - n / (slope + 1.0)));
+            }
+            
             Random.NextBytes(buf);
 
             lx += buf[0] switch

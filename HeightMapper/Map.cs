@@ -26,15 +26,14 @@ public class Map
             if (x < 0 || x >= Width) throw new ArgumentOutOfRangeException(nameof(x));
             if (y < 0 || y >= Height) throw new ArgumentOutOfRangeException(nameof(y));
             var i = PixelIndex(x, y);
-            return (ushort)((_data[i + 1] << 8) | (_data[i]));
+            return BitConverter.ToUInt16(_data, i);
         }
         set
         {
             if (x < 0 || x >= Width) throw new ArgumentOutOfRangeException(nameof(x));
             if (y < 0 || y >= Height) throw new ArgumentOutOfRangeException(nameof(y));
             var i = PixelIndex(x, y);
-            _data[i]     = (byte)(value        & 0xFF);
-            _data[i + 1] = (byte)((value >> 8) & 0xFF);
+            BitConverter.TryWriteBytes(_data.AsSpan(i), value);
         }
     }
     
@@ -51,7 +50,8 @@ public class Map
     {
         Width  = map.Width;
         Height = map.Height;
-        _data  = (byte[])map._data.Clone();
+        _data  = new byte[Width * Height * 2];
+        map._data.CopyTo(_data, 0);
     }
     
     public MagickImage ToImage()

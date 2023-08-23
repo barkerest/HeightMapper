@@ -4,7 +4,7 @@ namespace HeightMapper.Generators;
 
 public class Flat : GeneratorBase
 {
-    private readonly IntegerOption _height = new IntegerOption("Height", 100, 0, ushort.MaxValue);
+    private readonly IntegerOption _height = new IntegerOption("Height", 2560, 0, ushort.MaxValue);
 
     public Flat()
     {
